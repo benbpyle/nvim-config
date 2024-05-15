@@ -313,6 +313,7 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
 
         -- Document existing key chains
         require('which-key').register {
+          name = "testing",
             ['<leader>c'] = {
                 name = '[C]ode',
                 _ = 'which_key_ignore'
@@ -591,6 +592,8 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
                 --  For example, in C this would take you to the header.
                 map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
+                map('<leader>h', vim.lsp.buf.signature_help, 'Signature [H]elp')
+
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
                 --    See `:help CursorHold` for information about when this is executed
@@ -657,7 +660,7 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
         --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
         local servers = {
             -- clangd = {},
-            gopls = {},
+            -- gopls = {},
             -- pyright = {},
             rust_analyzer = {},
             -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -743,13 +746,14 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
             }
         end,
         formatters_by_ft = {
-            lua = {'stylua'}
+            lua = {'stylua'},
             -- Conform can also run multiple formatters sequentially
             -- python = { "isort", "black" },
             --
             -- You can use a sub-list to tell conform to run *until* a formatter
             -- is found.
-            -- javascript = { { "prettierd", "prettier" } },
+            javascript = { { "prettierd", "prettier" } },
+            typescript = { { "prettierd", "prettier" } },
         }
     }
 }, { -- Autocompletion
@@ -781,7 +785,7 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
     }, 'saadparwaiz1/cmp_luasnip', -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
     --  into multiple repos for maintenance purposes.
-    'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path'},
+    'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-path', 'hrsh7th/cmp-buffer'},
     config = function()
         -- See `:help cmp`
         local cmp = require 'cmp'
@@ -878,12 +882,12 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
         vim.cmd.hi 'Comment gui=none'
 
         -- BBP Auto-open Neotree on Startup
-        vim.cmd [[
-        augroup NEOTREE_AUGROUP
-        autocmd!
-        au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
-        augroup END
-      ]]
+      --   vim.cmd [[
+      --   augroup NEOTREE_AUGROUP
+      --   autocmd!
+      --   au VimEnter * lua vim.defer_fn(function() vim.cmd("Neotree show left") end, 10)
+      --   augroup END
+      -- ]]
         -- BBP Auto-open Neotree on Startup
     end
 }, -- Highlight todo, notes, etc in comments
@@ -920,16 +924,16 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
         local statusline = require 'mini.statusline'
         -- set use_icons to true if you have a Nerd Font
         statusline.setup {
-            use_icons = vim.g.have_nerd_font
+            use_icons = true
         }
 
         -- You can configure sections in the statusline by overriding their
         -- default behavior. For example, here we set the section for
         -- cursor location to LINE:COLUMN
         ---@diagnostic disable-next-line: duplicate-set-field
-        statusline.section_location = function()
-            return '%2l:%-2v'
-        end
+        -- statusline.section_location = function()
+        --     return '%2l:%-2v'
+        -- end
 
         -- ... and there is more!
         --  Check out: https://github.com/echasnovski/mini.nvim
@@ -977,9 +981,9 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
 --  Uncomment any of the lines below to enable them (you will need to restart nvim).
 --
 -- require 'kickstart.plugins.debug',
--- require 'kickstart.plugins.indent_line',
+require 'kickstart.plugins.indent_line',
 -- require 'kickstart.plugins.lint',
--- require 'kickstart.plugins.autopairs',
+require 'kickstart.plugins.autopairs',
 require 'kickstart.plugins.neo-tree', -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 --    This is the easiest way to modularize your config.
@@ -1016,6 +1020,7 @@ require 'kickstart.plugins.neo-tree', -- require 'kickstart.plugins.gitsigns', -
 --
 --
 -- BBP Custom
-vim.cmd 'colorscheme onedark'
--- vim.cmd.colorscheme "catppuccin"
+-- vim.cmd 'colorscheme onedark'
+vim.cmd 'colorscheme kanagawa'
+ -- vim.cmd.colorscheme "catppuccin"
 -- BBP Custom

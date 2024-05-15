@@ -62,7 +62,7 @@ return {
         options = {
             -- stylua: ignore
             mode = "buffer",
-            separator_style = 'slant',
+            separator_style = 'thick',
             -- always_show_bufferline = false,
             show_buffer_close_icons = false,
             show_close_icon = false,
