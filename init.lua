@@ -1021,6 +1021,6 @@ require 'kickstart.plugins.neo-tree', -- require 'kickstart.plugins.gitsigns', -
 --
 -- BBP Custom
 -- vim.cmd 'colorscheme onedark'
-vim.cmd 'colorscheme kanagawa'
- -- vim.cmd.colorscheme "catppuccin"
+-- vim.cmd 'colorscheme kanagawa'
+-- vim.cmd.colorscheme "catppuccin-macchiato"
 -- BBP Custom
