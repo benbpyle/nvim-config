@@ -133,7 +133,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 1000
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -224,6 +224,8 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', {
     desc = 'Move focus to the upper window'
 })
 
+-- vim.o.guicursor = 'n-v-c-sm-i-ci-ve:block,r-cr-o:hor20,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor'
+vim.opt.guicursor = "i-ci-ve:hor40,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor"
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -237,6 +239,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     }),
     callback = function()
         vim.highlight.on_yank()
+        -- vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, {
+        --     buffer = args.buf
+        -- }, {
+        --     remap = true
+        -- })
     end
 })
 
@@ -349,6 +356,10 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
             },
             ['<leader>h'] = {
                 name = 'Git [H]unk',
+                _ = 'which_key_ignore'
+            },
+            ['<leader>x'] = {
+                name = "Diagnosti[x]",
                 _ = 'which_key_ignore'
             }
         }
@@ -587,7 +598,7 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-        ensure_installed = {'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc'},
+        ensure_installed = {'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'dockerfile'},
         -- Autoinstall languages that are not installed
         auto_install = true,
         highlight = {
@@ -617,24 +628,8 @@ require('lazy').setup({ -- NOTE: Plugins can be added with a link (or for a gith
         --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
         --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end
-}, -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
--- init.lua. If you want these files, they are in the repository, so you can just download them and
--- place them in the correct locations.
--- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
---
---  Here are some example plugins that I've included in the Kickstart repository.
---  Uncomment any of the lines below to enable them (you will need to restart nvim).
---
--- require 'kickstart.plugins.debug',
-require 'kickstart.plugins.indent_line', -- require 'kickstart.plugins.lint',
-require 'kickstart.plugins.autopairs', require 'kickstart.plugins.neo-tree', require 'kickstart.plugins.nvm-cmp',
-require 'kickstart.plugins.lsp', -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
--- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
---    This is the easiest way to modularize your config.
---
---  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
---    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-{
+}, -- require 'kickstart.plugins.debug', 
+require 'kickstart.plugins.indent_line', require 'kickstart.plugins.autopairs', require 'kickstart.plugins.neo-tree', {
     import = 'custom.plugins'
 }}, {
     ui = {
@@ -658,13 +653,5 @@ require 'kickstart.plugins.lsp', -- require 'kickstart.plugins.gitsigns', -- add
     }
 })
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
---
---
---
--- BBP Custom
--- vim.cmd 'colorscheme onedark'
--- vim.cmd 'colorscheme kanagawa'
+-- catppuccin "catppuccin-frappe" -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 -- vim.cmd.colorscheme "catppuccin-macchiato"
--- BBP Custom
