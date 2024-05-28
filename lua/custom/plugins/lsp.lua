@@ -139,5 +139,19 @@ return {{ -- LSP Configuration & Plugins
             }
         })
 
+        lspconfig.rust_analyzer.setup {
+            settings = {
+                ["rust-analyzer"] = {
+                    workspace = {
+                        symbol = {
+                            search = {
+                                kind = "all_symbols"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     end
 }}
